@@ -12,7 +12,7 @@ import {
 import { data } from '@/utils/data';
 import Image from 'next/image';
 import { useMediaQuery } from '@/hooks/useMediaQuery';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 function Home() {
@@ -64,6 +64,37 @@ function Home() {
   };
 
   const links = ['home', 'shop', 'about', 'contact'];
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'ArrowRight') {
+        handleNext();
+      } else if (event.key === 'ArrowLeft') {
+        handlePrevious();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentIndex, handleNext, handlePrevious]);
+
+  useEffect(() => {
+    const handleEscapeKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMobile(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleEscapeKeyDown);
+
+    // Cleanup the event listener on unmount
+    return () => {
+      window.removeEventListener('keydown', handleEscapeKeyDown);
+    };
+  }, [setIsMobile]);
 
   return (
     <main>
@@ -123,6 +154,7 @@ function Home() {
               <div
                 aria-label="Open mobile menu"
                 onClick={() => setIsMobile(true)}
+                className="cursor-pointer"
               >
                 <Image src={iconHamburger} alt="icon hamburger" />
               </div>
