@@ -166,13 +166,13 @@ function Home() {
               custom={direction}
             >
               <Image
-                className="size-full"
+                className="size-full object-cover"
                 src={
                   macthes
                     ? data[currentIndex].images.small
                     : data[currentIndex].images.large
                 }
-                alt="A image with chair, table and small tree pot on the table"
+                alt="Furniture with chairs and tables"
               />
             </motion.div>
           </div>
