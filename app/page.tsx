@@ -37,29 +37,26 @@ function Home() {
 
   const animationVariants = {
     initial: (direction: number) => {
-      return { x: `${110 * direction}%`, opacity: 0 };
+      return { x: `${110 * direction}%` };
     },
-    animate: { x: '0%', opacity: 1 },
+    animate: { x: '0%' },
     exit: (direction: number) => {
-      return { x: `${-110 * direction}%`, opacity: 0 };
+      return { x: `${-110 * direction}%` };
     }
   };
 
   const animationInfoVariants = {
     initial: {
       y: '100%',
-      opacity: 0,
-      scale: 0.8
+      opacity: 0
     },
     animate: {
       y: '0%',
-      scale: 1,
       opacity: 1
     },
     exit: {
       y: '100%',
-      opacity: 0,
-      scale: 0.8
+      opacity: 0
     }
   };
 
@@ -192,7 +189,11 @@ function Home() {
               initial="initial"
               animate="animate"
               exit="exit"
-              transition={{ duration: 0.5, type: 'spring', bounce: 0 }}
+              transition={{
+                duration: 0.5,
+                type: 'spring',
+                bounce: 0
+              }}
               className="size-full"
               key={data[currentIndex].title}
               custom={direction}
@@ -211,7 +212,7 @@ function Home() {
         </AnimatePresence>
         <AnimatePresence mode="wait" initial={false}>
           <div className="relative lg:col-span-5">
-            <div className="overflow-hidden px-8 py-[60px]  lg:px-[100px] lg:py-[120px]">
+            <div className="overflow-hidden px-8 py-[60px] w-full h-full  lg:px-[100px] lg:py-[120px]">
               <motion.div
                 variants={animationInfoVariants}
                 initial="initial"
@@ -219,10 +220,7 @@ function Home() {
                 exit="exit"
                 key={data[currentIndex].title}
                 transition={{
-                  duration: 0.5,
-                  type: 'spring',
-                  delay: 0.1,
-                  bounce: 0
+                  ease: 'easeInOut'
                 }}
                 className="flex size-full flex-col items-start justify-center overflow-hidden"
               >
